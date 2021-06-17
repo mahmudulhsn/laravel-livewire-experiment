@@ -10,9 +10,11 @@ class PostLists extends Component
 {
     use WithPagination;
 
+    protected $listeners = ['create_post' => 'render'];
+
     public function render()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::latest()->paginate(10);
         return view('livewire.post-lists', compact('posts'));
     }
 }
