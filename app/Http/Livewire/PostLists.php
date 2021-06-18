@@ -17,4 +17,12 @@ class PostLists extends Component
         $posts = Post::latest()->paginate(10);
         return view('livewire.post-lists', compact('posts'));
     }
+
+    public function delete($postID)
+    {
+        $post = Post::findOrFail($postID);
+        $post->delete();
+
+        $this->emit('posts');
+    }
 }
